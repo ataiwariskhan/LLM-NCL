@@ -32,13 +32,13 @@ We used the GSM8K dataset, which contains a rich set of mathematical word proble
 *   ACT-R style trace events, detailing the intermediate steps.
 *   Quantitative features from the trace events (number of steps, operations, etc.).
 
-The problem prompts were used to generate embeddings from the Gemma model, while the trace events and their extracted features formed the ACT-R component.
+The problem prompts were used to generate embeddings from the Qwen model, while the trace events and their extracted features formed the ACT-R component.
 
 ## Results and Analysis
 
 After training both models on the prepared data, we evaluated their performance on a held-out test set.
 
-| Metric           | Baseline (Gemma Only) | NCA Fusion (Qwen + ACT-R) | Improvement | Relative Improvement |
+| Metric           | Baseline (Qwen Only) | NCA Fusion (Qwen + ACT-R) | Improvement | Relative Improvement |
 | :--------------- | :-------------------- | :------------------------- | :---------- | :------------------- |
 | Test Accuracy    | {{baseline_accuracy:.4f}}     | {{nca_accuracy:.4f}}       | {{accuracy_improvement:.4f}}    | {{relative_accuracy_improvement:.2f}}%  |
 | Test F1 Score    | {{baseline_f1:.4f}}        | {{nca_f1:.4f}}         | {{f1_improvement:.4f}}       | -                    |
@@ -48,7 +48,7 @@ After training both models on the prepared data, we evaluated their performance 
 The NCA Fusion model significantly outperformed the Qwen-only baseline in terms of both test accuracy and F1 score. This suggests that explicitly incorporating structured reasoning information, even in the form of extracted features, helps the model better predict the correct solutions.
 
 The learned attention weights in the NCA model provide further insight:
-*   Qwen Weight: {{gemma_weight:.3f}}
+*   Qwen Weight: {{Qwen_weight:.3f}}
 *   ACT-R Weight: {{actr_weight:.3f}}
 
 The higher weight on the ACT-R features ({{actr_weight:.3f}}) indicates that the model found the structured trace information to be more influential than the raw Qwen embedding for this task, validating our hypothesis.
